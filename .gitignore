@@ -8,3 +8,5 @@ src/.DS_Store
 platformio.ini
 
 *.json
+tags
+cscope.*

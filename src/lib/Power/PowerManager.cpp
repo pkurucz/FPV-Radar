@@ -6,6 +6,10 @@ PowerManager::PowerManager()
     power = new TBeamPower();
     power->begin();
 #endif
+#ifdef TARGET_HAWK
+    power = new HawkPower();
+    power->begin();
+#endif
 }
 
 PowerManager *powerManager = nullptr;
@@ -27,6 +31,10 @@ void PowerManager::enablePeripherals()
     power->power_GPS(true);
     power->power_LoRa(true);
 #endif
+#ifdef TARGET_HAWK
+    power->power_int_peripherals(true);
+    power->power_ext_peripherals(true);
+#endif
 }
 
 void PowerManager::statusJson(JsonDocument *doc)
@@ -35,5 +43,12 @@ void PowerManager::statusJson(JsonDocument *doc)
     JsonObject o = doc->createNestedObject("voltages");
     o["batteryVoltage"] = power->get_battery_voltage();
     o["supplyVoltage"] = power->get_supply_voltage();
+#endif
+#ifdef TARGET_HAWK
+#warning PK
+    JsonObject o = doc->createNestedObject("voltages");
+    o["supplyVoltage"] = power->get_supply_voltage();
+    o["batteryVoltage"] = power->get_battery_voltage();
+    o["rcVoltage"] = power->get_rc_voltage();
 #endif
 }

@@ -106,17 +106,19 @@ void setup()
     attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), handleInterrupt, RISING);
 #endif
     sys.io_button_pressed = 0;
-    if (cfg.display_enable)
-    {
-        display_draw_intro();
-    }
-
-    delay(START_DELAY);
 
     // Create PowerManager
     DBGLN("[main] start PowerManager");
     PowerManager *powerManager = PowerManager::getSingleton();
     powerManager->enablePeripherals();
+
+    delay(START_DELAY);
+
+    // Init the Display
+    if (cfg.display_enable)
+    {
+        display_draw_intro();
+    }
 
     // Create StatsManager
     DBGLN("[main] start StatsManager");

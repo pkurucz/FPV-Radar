@@ -5,6 +5,9 @@
 #ifdef TARGET_TBEAM
 #include <TBeamPower.h>
 #endif
+#ifdef TARGET_HAWK
+#include <lib/Power/HawkPower.h>
+#endif
 
 class PowerManager {
 public:
@@ -15,5 +18,8 @@ public:
 private:
 #ifdef TARGET_TBEAM
     TBeamPower *power;
+#endif
+#ifdef TARGET_HAWK
+    HawkPower *power;
 #endif
 };

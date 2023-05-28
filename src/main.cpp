@@ -102,8 +102,13 @@ void setup()
 #endif
     sys.io_led_blink = 0;
 #ifdef PIN_BUTTON
+#ifdef PIN_BUTTON_INVERTED
+    pinMode(PIN_BUTTON, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), handleInterrupt, FALLING);
+#else /* ifdef PIN_BUTTON_INVERTED */
     pinMode(PIN_BUTTON, INPUT);
     attachInterrupt(digitalPinToInterrupt(PIN_BUTTON), handleInterrupt, RISING);
+#endif /* ifdef PIN_BUTTON_INVERTED */
 #endif
     sys.io_button_pressed = 0;
 

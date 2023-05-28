@@ -45,7 +45,6 @@ void PowerManager::statusJson(JsonDocument *doc)
     o["supplyVoltage"] = power->get_supply_voltage();
 #endif
 #ifdef TARGET_HAWK
-#warning PK
     JsonObject o = doc->createNestedObject("voltages");
     o["supplyVoltage"] = power->get_supply_voltage();
     o["batteryVoltage"] = power->get_battery_voltage();
